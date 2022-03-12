@@ -1,15 +1,16 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { setSearchType } from './pokedex';
 
-const Header = ({handler}) => {
+const Header = ({handler, currentType}) => {
 
     const dispatch = useDispatch()
-    const types = ['normal','bug','fire','grass','poison','flying','fighting','water','fairy']
-    // console.log(handler);
+    const types = ['all','normal','bug','fire','grass','poison','flying','fighting','water','fairy']
+    // console.log(currentType);
 
     return (
         <header>
             <input type="text" placeholder='Search...' className='search-form' onChange={(e) => dispatch(handler(e.target.value))} />
-            <select name="pets" className="type-select">
+            <select className="type-select" value={currentType} onChange={(e)=>dispatch(setSearchType(e.target.value))}>
                 {
                     types.map((item, index)=><option key={index} value={item}>{item}</option>)
                 }

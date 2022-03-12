@@ -3,31 +3,28 @@ import { useSelector, useDispatch } from 'react-redux';
 import fetchPokemons from './pokeAPI';
 import { setPokeList, setSearchTerm } from './pokedex';
 import Header from './Header'
+import pokeFilter from './pokeFilter'
 
 const App = () => {
 
     const dispatch = useDispatch()
     const poke = useSelector((state)=>state.poke)
-
+    const {search} = poke
     console.log(poke);
   
     useEffect(() => {
-      fetchPokemons().then((pokemons)=>{
-        dispatch(setPokeList(pokemons))
+      fetchPokemons().then((data)=>{
+        dispatch(setPokeList(data))
       })
     }, [])
     
     return (
       <>
-        <Header handler={setSearchTerm}/>
+        <Header handler={setSearchTerm} currentType={search.type}/>
         <main className='wrapper'>
           {
             poke.pokeList.filter((val) => {
-              if (poke.searchTerm == "") {
-                return val
-              } else if (val.name.toLowerCase().includes(poke.searchTerm.toLowerCase())) {
-                return val
-              }
+              return pokeFilter(val, search)
             }).map((item, index) => {
               const { name, height, weight, sprites } = item
               const { front_default } = sprites
