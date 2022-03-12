@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;900&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  color: black;
+  overflow-x: hidden;
+  font-family: 'Roboto', sans-serif;
+  background-color: #fafafa;
+}
+
+input:focus {
+  outline: none !important;
+}
+select:focus {
+  outline: none !important;
+  //border-bottom-left-radius: 0;
+  //border-bottom-right-radius: 0;
+}
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 1100px;
+  border: 1px solid white;
+}
+
+.pokemon-card {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 250px;
+  height: 340px;
+  border-radius: 10px;
+  margin: 15px;
+  background-color: white;
+  box-shadow: 2px 2px 5px rgb(170, 170, 170);
+}
+.pokemon-card h2 {
+  font-weight: 900;
+  margin: 0;
+}
+.pokemon-card h2::first-letter {
+  text-transform:capitalize;
+}
+.pokemon-card img {
+  width: 150px;
+}
+.desc {
+  display: grid;
+  width: 90%;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+}
+header {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.search-form {
+  box-sizing: border-box;
+  background: #c9c9c9;
+  padding-left: 10px;
+  width: 280px;
+  height: 50px;
+  border-radius: 8px;
+  border: none;
+}
+.desc-info {
+  text-align: center;
+}
+.desc-info h3 {
+  font-weight: 400;
+  margin-bottom: 2px;
+  font-size: 16px;
+}
+.desc-info p {
+  font-weight: 300;
+  margin: 0;
+  font-size: 12px;
+}
+.desc-type {
+  margin-top: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  grid-row: 2/3;
+  grid-column: 1/3;
+  align-items: center;
+}
+.desc-type p {
+  border: 2px solid #7272ff;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 1px;
+  margin: 0 5px;
+  padding: 5px 8px;
+}
+.type-select {
+  box-sizing: border-box;
+  background-color: #7272ff;
+  margin-left: 10px;
+  color: white;
+  padding-left: 10px;
+  width: 80px;
+  height: 50px;
+  border-radius: 8px;
+  border: none;
+}
