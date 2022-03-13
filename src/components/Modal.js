@@ -8,62 +8,85 @@ position: fixed;
 display: flex;
 justify-content: center;
 align-items: center;
-visibility: ${({open})=>{
-    return open ? 'visible' : 'hidden'
+visibility: ${({transition})=>{
+    return transition ? 'visible' : 'hidden'
 }};
-opacity: ${({open})=>{
-    return open ? '1' : '0'
+opacity: ${({transition})=>{
+    return transition ? '1' : '0'
 }};
 top: 0;
 left: 0;
 width: 100vw;
 height: 100vh;
 background-color: #000000b3;
+transition: 0.2s;
 z-index: 1000;
 `
 
-const Modal = ({open, id}) => {
+const ModalContent = styled.div.attrs(props=>({
+    className: props.className
+}))`
+position: relative;
+  width: 100%;
+  height: 80%;
+  max-width: 400px;
+  max-height: 400px;
+  background-color: white;
+  border-radius: 8px;
+  transition: 0.2s;
+  transform: ${({transition})=>{
+    return transition ? 'scale(1)' : 'scale(0.5)'
+}};
+`
+
+const Modal = ({id}) => {
 
     const [pokeInfo, setPokeInfo] = useState('')
+    const [transition, setTransition] = useState(false)
+
     const dispatch = useDispatch()
     const poke = useSelector((state)=>state.poke)
-    
-
-
 
     useEffect(()=>{
+
+        let types = []
+
         for(let i=0;i<poke.pokeList.length;i++) {
             if(poke.pokeList[i].id==id) {
+                let index=0
+                for(let j=0;j<poke.pokeList[i].types.length;j++) {
+                    types[index] = poke.pokeList[i].types[j].type.name
+                    index++
+                }
+                console.log(types);
                 setPokeInfo({
                     img: poke.pokeList[i].sprites.front_default,
                     name: poke.pokeList[i].name,
                     height: poke.pokeList[i].height,
                     weight: poke.pokeList[i].weight,
+                    types: types
                 })
             }
         }
+        setTransition(true)
     },[])
 
-    console.log("modal: ", pokeInfo);
-
-    if(open) {
         return (
-            <ModalBox open={open}>
-                <div className='modal-content'>
+            <ModalBox transition={transition}>
+                <ModalContent className='modal-content' transition={transition}>
                   <button className="close-btn" onClick={()=>dispatch(setModalStatus({open: false}))}>close</button>
                   <img className="modal-image" src={pokeInfo.img} alt=''></img>
                   <h1>{pokeInfo.name}</h1>
                   <div>
                     <h4><span>Height:</span> {pokeInfo.height}m</h4>
                     <h4><span>Weight:</span> {pokeInfo.weight}kg</h4>
+                    <div className='desc-type'>
+                        {(pokeInfo.types) ? pokeInfo.types.map((item)=><p>{item}</p>): <></>}
+                    </div>
                   </div>
-                </div>
+                </ModalContent>
             </ModalBox>
         )
-    } else {
-        return <></>
-    }
-    
 }
 
 export default Modal

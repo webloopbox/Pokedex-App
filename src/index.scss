@@ -190,6 +190,10 @@ header {
   padding: 5px 8px;
   border-radius: 8px;
   border: none;
+  transition: 0.2s;
+}
+.close-btn:hover {
+  transform: translateY(1px);
 }
 .modal-image {
   width: 50%;
