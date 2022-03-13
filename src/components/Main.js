@@ -1,11 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import { setPokeList, setSearchTerm, setLoading } from '../pokedex';
+import { setPokeList, setSearchTerm, setLoading, setModalStatus } from '../pokedex';
 import pokeFilter from '../pokeFilter'
 import PokeCard from './pokeCard' 
 import Header from './Header'
 import SkeletonCard from './SkeletonCard';
 import {loadMore} from '../pokeAPI';
+import Modal from './Modal';
 
 
 
@@ -14,8 +14,7 @@ const Main = ({pokeList, search}) => {
   const dispatch = useDispatch()
 
   const poke = useSelector((state)=>state.poke)
-  const {loadingInit, loadingMore} = poke
-
+  const {loadingInit, loadingMore, modalStatus} = poke
   const morePoke = async () => {
     dispatch(setLoading({type: 'more', value: true}))
     const total = pokeList.length
@@ -38,7 +37,7 @@ const Main = ({pokeList, search}) => {
               return pokeFilter(val, search)
             }).map((item) => {
               const { id, name, height, weight, sprites } = item
-              return <PokeCard key={id} item={item} name={name} height={height} weight={weight} sprites={sprites}  />
+              return <PokeCard key={id} item={item} name={name} height={height} weight={weight} sprites={sprites} onClick={()=>dispatch(setModalStatus({open: true, id}))} />
             })
           }
           
@@ -46,8 +45,10 @@ const Main = ({pokeList, search}) => {
           {
             (loadingInit==true) ? 
             <></> : (loadingMore==true) ?
-               <SkeletonCard load='more'/> : <button className='load-more' onClick={()=>{morePoke()}}>Load more</button>
+               <SkeletonCard load='more'/> : <button className='load-more' onClick={()=>morePoke()}>Load more</button>
           }
+
+          {(modalStatus.open) ? <Modal open={modalStatus.open} id={modalStatus.id}/> : <></>}
           
         </main>
     )

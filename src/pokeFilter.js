@@ -4,13 +4,17 @@ const pokeFilter = (val, search) => {
                   types[i] = val.types[i].type.name
               }
               
-              if(search.term == "" && search.type=='all') {
+              if(search.term == "" && (search.type=='name' || search.type=='type')) {
                 return val
-              } else if (search.term == "" && types.includes(search.type)) {
+              } else if (search.type == "name" && val.name.toLowerCase().includes(search.term.toLowerCase())) {
                 return val
-              } else if (val.name.toLowerCase().includes(search.term.toLowerCase()) && (search.type=='all' || types.includes(search.type))) {
-                return val
-              }
+              } else if (search.type == "type") {
+                for(let i=0; i<types.length; i++) {
+                  if(types[i].includes(search.term.toLowerCase())) {
+                    return val
+                  }
+                }
+              } 
 }
 
 export default pokeFilter

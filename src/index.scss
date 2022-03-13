@@ -37,11 +37,16 @@ select:hover, button:hover {
   align-items: center;
   flex-direction: column;
   width: 250px;
-  height: 340px;
+  height: 300px;
   border-radius: 10px;
   margin: 15px;
   background-color: white;
   box-shadow: 2px 2px 5px rgb(170, 170, 170);
+  transition: transform 0.2s;
+}
+.pokemon-card:hover {
+  cursor: pointer;
+  transform: translateY(-5px);
 }
 .pokemon-card h2 {
   font-weight: 900;
@@ -54,10 +59,7 @@ select:hover, button:hover {
   width: 150px;
 }
 .desc {
-  display: grid;
   width: 90%;
-  grid-template-columns: 1fr 1fr;
-  justify-items: center;
 }
 header {
   height: 100px;
@@ -91,8 +93,7 @@ header {
   margin-top: 25px;
   display: flex;
   flex-wrap: wrap;
-  grid-row: 2/3;
-  grid-column: 1/3;
+  justify-content: center;
   align-items: center;
 }
 .desc-type p {
@@ -130,4 +131,66 @@ header {
   margin: 40px 0 60px 0;
   border-radius: 8px;
   border: none;
+}
+
+.modal {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000b3;
+  z-index: 1000;
+}
+.modal-content {
+  position: relative;
+  width: 100%;
+  height: 80%;
+  max-width: 400px;
+  max-height: 400px;
+  background-color: white;
+  border-radius: 8px;
+}
+.modal-content h1 {
+  margin: -25px 0 25px 0;
+  text-transform: capitalize;
+}
+.modal-content div {
+  text-align: left;
+}
+.modal-content h4 {
+  margin-left: 30px;
+  font-size: 20px;
+  font-weight: 500;
+}
+.modal-content h4 span {
+  position: relative;
+  font-weight: 900;
+}
+.modal-content h4 span::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  height: 5px;
+  width: 100%;
+  background-color: #7272ff;
+  border-radius: 5px;
+  font-weight: 900;
+}
+.close-btn {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  background-color: #7272ff;
+  color: white;
+  padding: 5px 8px;
+  border-radius: 8px;
+  border: none;
+}
+.modal-image {
+  width: 50%;
 }

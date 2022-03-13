@@ -11,9 +11,8 @@ const Header = ({handler, currentType}) => {
         <header>
             <input type="text" placeholder='Search...' className='search-form' onChange={(e) => dispatch(handler(e.target.value))} />
             <select className="type-select" value={currentType} onChange={(e)=>dispatch(setSearchType(e.target.value))}>
-                {
-                    types.map((item, index)=><option key={index} value={item}>{item}</option>)
-                }
+                <option value='name'>name</option>
+                <option value='type'>type</option>
             </select>
         </header> 
     )
