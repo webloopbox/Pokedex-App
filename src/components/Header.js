@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { setSearchType } from './pokedex';
+import { setSearchType } from '../pokedex';
 
 const Header = ({handler, currentType}) => {
 

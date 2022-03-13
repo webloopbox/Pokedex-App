@@ -6,10 +6,22 @@ const getPoke = async (id) => {
 
   const fetchPokemons = async () => {
     const items = []
-    for (let i = 3; i <= 60; i+=3) {
-      items[i - 1] = await getPoke(i)
+    for (let i = 1; i <= 20; i++) {
+      items[i-1] = await getPoke(i)
     }
     return items
   }
 
+  const loadMore = async (total) => {
+    let items = []
+    let currentIndex = 0;
+    for (let i = total+1; i <= total+10; i++) {
+      items[currentIndex] = await getPoke(i)
+      currentIndex++
+    }
+    //console.log(items);
+    return items
+  }
+
  export default fetchPokemons
+ export {loadMore}

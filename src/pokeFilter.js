@@ -7,7 +7,6 @@ const pokeFilter = (val, search) => {
               if(search.term == "" && search.type=='all') {
                 return val
               } else if (search.term == "" && types.includes(search.type)) {
-                console.log(val.types[0].type.name);
                 return val
               } else if (val.name.toLowerCase().includes(search.term.toLowerCase()) && (search.type=='all' || types.includes(search.type))) {
                 return val
