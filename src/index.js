@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
+import './styles/index.scss';
 import App from './App';
 import {configureStore} from '@reduxjs/toolkit'
 import { Provider } from 'react-redux';
