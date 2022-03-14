@@ -31,7 +31,9 @@ position: relative;
   height: 80%;
   max-width: 400px;
   max-height: 400px;
-  background-color: white;
+  background-color: ${({darkTheme})=>{
+    return darkTheme ? '#34495E' : 'white'
+}};
   border-radius: 8px;
   transition: 0.2s;
   transform: ${({transition})=>{
@@ -58,7 +60,7 @@ const Modal = ({id}) => {
                     types[index] = poke.pokeList[i].types[j].type.name
                     index++
                 }
-                console.log(types);
+                
                 setPokeInfo({
                     img: poke.pokeList[i].sprites.front_default,
                     name: poke.pokeList[i].name,
@@ -73,7 +75,7 @@ const Modal = ({id}) => {
 
         return (
             <ModalBox transition={transition}>
-                <ModalContent className='modal-content' transition={transition}>
+                <ModalContent className='modal-content' transition={transition} darkTheme={poke.darkTheme}>
                   <button className="close-btn" onClick={()=>dispatch(setModalStatus({open: false}))}>close</button>
                   <img className="modal-image" src={pokeInfo.img} alt=''></img>
                   <h1>{pokeInfo.name}</h1>

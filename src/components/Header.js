@@ -5,7 +5,6 @@ const Header = ({handler, currentType}) => {
 
     const dispatch = useDispatch()
     const types = ['all','normal','bug','fire','grass','poison','flying','fighting','water','fairy']
-    // console.log(currentType);
 
     return (
         <header>

@@ -9,6 +9,7 @@
     height: 100vh;
     background-color: #000000b3;
     z-index: 1000;
+    transition: background-color 0.2s, color 0.2s;
   }
   .modal-content {
     position: relative;

@@ -8,13 +8,12 @@ import {loadMore} from '../pokeAPI';
 import Modal from './Modal';
 
 
-
 const Main = ({pokeList, search}) => {
 
   const dispatch = useDispatch()
-
   const poke = useSelector((state)=>state.poke)
   const {loadingInit, loadingMore, modalStatus} = poke
+  
   const morePoke = async () => {
     dispatch(setLoading({type: 'more', value: true}))
     const total = pokeList.length
@@ -28,6 +27,7 @@ const Main = ({pokeList, search}) => {
   }
 
     return (
+      <div className={"container " + (poke.darkTheme ? 'dark' : '')}>
         <main className='wrapper'>
           <Header handler={setSearchTerm} currentType={search.type}/>
           <div className='pokemon-cards'>
@@ -43,14 +43,16 @@ const Main = ({pokeList, search}) => {
           
           </div>
           {
-            (loadingInit==true) ? 
-            <></> : (loadingMore==true) ?
-               <SkeletonCard load='more'/> : <button className='load-more' onClick={()=>morePoke()}>Load more</button>
+            (poke.search.term!='') ?
+            <></> : (loadingInit==true) ? 
+                      <></> : (loadingMore==true) ?
+                        <SkeletonCard load='more'/> : <button className='load-more' onClick={()=>morePoke()}>Load more</button>
           }
 
           {(modalStatus.open) ? <Modal open={modalStatus.open} id={modalStatus.id}/> : <></>}
           
         </main>
+      </div>
     )
 }
 

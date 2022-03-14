@@ -8,6 +8,7 @@ export const pokeSlice = createSlice({
         loadingInit: true,
         loadingMore: false,
         modalStatus: {open: false, id: ''},
+        darkTheme: false,
     },
         reducers: {
             setPokeList: (state, action)=> {
@@ -31,9 +32,12 @@ export const pokeSlice = createSlice({
                 if(action.payload.id) {
                     state.modalStatus.id = action.payload.id
                 }
+            },
+            setDarkTheme: (state, action) => {
+                state.darkTheme = action.payload
             }
         }
 })
 
-export const {setPokeList, setSearchTerm, setSearchType, setLoading, setModalStatus} = pokeSlice.actions
+export const {setPokeList, setSearchTerm, setSearchType, setLoading, setModalStatus, setDarkTheme} = pokeSlice.actions
 export default pokeSlice.reducer

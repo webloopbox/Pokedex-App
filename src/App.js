@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import fetchPokemons from './pokeAPI';
-import { setPokeList, setSearchTerm, setLoading } from './pokedex';
+import { setPokeList, setSearchTerm, setLoading, setDarkTheme } from './pokedex';
 import Main from './components/Main';
+import Switch from "react-switch";
+import { Sun } from './icons/Sun';
+import { Moon } from './icons/Moon';
 
 const App = () => {
 
     const dispatch = useDispatch()
     const poke = useSelector((state)=>state.poke)
     const {search} = poke
-    console.log(poke);
   
     useEffect(() => {
       dispatch(setLoading({type: 'init', value: true}))
@@ -24,6 +26,9 @@ const App = () => {
     
     return (
       <>
+          <div className={"switch " + (poke.darkTheme ? 'dark' : '')}>
+            <Switch uncheckedIcon={<Sun/>} checkedIcon={<Moon/>} onColor='#7272ff' borderRadius={8} checked={poke.darkTheme} onChange={()=>dispatch(setDarkTheme(!poke.darkTheme))}/>
+          </div> 
         <Main pokeList={poke.pokeList} search={search}/>
       </>
   

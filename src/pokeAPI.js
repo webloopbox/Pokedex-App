@@ -19,7 +19,6 @@ const getPoke = async (id) => {
       items[currentIndex] = await getPoke(i)
       currentIndex++
     }
-    //console.log(items);
     return items
   }
 

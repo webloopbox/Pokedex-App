@@ -1,4 +1,8 @@
+import { useSelector } from 'react-redux';
+
 const PokeCard = ({ item, name, height, weight, sprites, onClick }) => {
+
+              const poke = useSelector((state)=>state.poke)
   
               const { front_default } = sprites
               const types = []
@@ -8,7 +12,7 @@ const PokeCard = ({ item, name, height, weight, sprites, onClick }) => {
               }
   
               return (
-                <div className='pokemon-card' onClick={onClick}>
+                <div className={"pokemon-card " + (poke.darkTheme ? 'dark-card' : '')} onClick={onClick}>
                   <img src={front_default} alt="" />
                   <h2>{name}</h2>
                   <div className='desc'>

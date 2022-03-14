@@ -1,0 +1,15 @@
+.switch {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.dark {
+    color: white;
+    background-color: #263646;
+}
+.dark-card {
+    background-color: #34495E;
+    box-shadow: none;
+}
