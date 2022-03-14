@@ -7,6 +7,7 @@ body {
   overflow-x: hidden;
   font-family: 'Roboto', sans-serif;
   background-color: #fafafa;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 @import "./header";

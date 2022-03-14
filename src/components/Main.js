@@ -27,7 +27,7 @@ const Main = ({pokeList, search}) => {
   }
 
     return (
-      <div className={"container " + (poke.darkTheme ? 'dark' : '')}>
+      <div className="container">
         <main className='wrapper'>
           <Header handler={setSearchTerm} currentType={search.type}/>
           <div className='pokemon-cards'>

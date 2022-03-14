@@ -6,6 +6,8 @@ import Main from './components/Main';
 import Switch from "react-switch";
 import { Sun } from './icons/Sun';
 import { Moon } from './icons/Moon';
+import {Helmet} from 'react-helmet';
+
 
 const App = () => {
 
@@ -26,6 +28,16 @@ const App = () => {
     
     return (
       <>
+          <Helmet>
+            <style type="text/css">
+                {`
+                  body {
+                      background-color: ${poke.darkTheme?'#263646':'fafafa'};
+                      color: ${poke.darkTheme?'white':'black'};
+                  }
+                `}
+              </style>
+          </Helmet>
           <div className={"switch " + (poke.darkTheme ? 'dark' : '')}>
             <Switch uncheckedIcon={<Sun/>} checkedIcon={<Moon/>} onColor='#7272ff' borderRadius={8} checked={poke.darkTheme} onChange={()=>dispatch(setDarkTheme(!poke.darkTheme))}/>
           </div> 
