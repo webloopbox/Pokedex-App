@@ -37,7 +37,7 @@ position: relative;
   border-radius: 8px;
   transition: 0.2s;
   transform: ${({transition})=>{
-    return transition ? 'scale(1)' : 'scale(0.5)'
+    return transition ? 'scale(1)' : 'scale(0.8)'
 }};
 `
 
@@ -73,10 +73,15 @@ const Modal = ({id}) => {
         setTransition(true)
     },[])
 
+    const handleClose = () => {
+        setTransition(false)
+        setTimeout(()=>dispatch(setModalStatus({open: false})), 300)
+    }
+
         return (
             <ModalBox transition={transition}>
                 <ModalContent className='modal-content' transition={transition} darkTheme={poke.darkTheme}>
-                  <button className="close-btn" onClick={()=>dispatch(setModalStatus({open: false}))}>close</button>
+                  <button className="close-btn" onClick={()=>handleClose()}>close</button>
                   <img className="modal-image" src={pokeInfo.img} alt=''></img>
                   <h1>{pokeInfo.name}</h1>
                   <div>
