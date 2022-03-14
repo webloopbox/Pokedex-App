@@ -85,8 +85,8 @@ const Modal = ({id}) => {
                   <img className="modal-image" src={pokeInfo.img} alt=''></img>
                   <h1>{pokeInfo.name}</h1>
                   <div>
-                    <h4><span>Height:</span> {pokeInfo.height}m</h4>
-                    <h4><span>Weight:</span> {pokeInfo.weight}kg</h4>
+                    <h4><span>Height:</span> {pokeInfo.height/10}m</h4>
+                    <h4><span>Weight:</span> {pokeInfo.weight/10}kg</h4>
                     <div className='desc-type'>
                         {(pokeInfo.types) ? pokeInfo.types.map((item)=><p>{item}</p>): <></>}
                     </div>
