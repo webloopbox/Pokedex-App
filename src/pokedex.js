@@ -8,7 +8,7 @@ export const pokeSlice = createSlice({
     loadingInit: true,
     loadingMore: false,
     modalStatus: { open: false, id: "" },
-    darkTheme: false,
+    darkTheme: JSON.parse(localStorage.getItem("darkTheme")) || false,
   },
   reducers: {
     setPokeList: (state, action) => {
@@ -34,7 +34,9 @@ export const pokeSlice = createSlice({
       }
     },
     setDarkTheme: (state, action) => {
-      state.darkTheme = action.payload;
+      localStorage.setItem("darkTheme", action.payload)
+      let status = JSON.parse(localStorage.getItem("darkTheme"))
+      state.darkTheme = status;
     },
   },
 });
