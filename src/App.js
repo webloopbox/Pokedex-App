@@ -18,10 +18,14 @@ const App = () => {
   useEffect(() => {
     dispatch(setLoading({ type: 'init', value: true }))
     const timing = setTimeout(() => {
+
       fetchPokemons().then((data) => {
         dispatch(setPokeList(data))
         dispatch(setLoading({ type: 'init', value: false }))
       })
+
+      document.body.style.transition = "background-color 0.2s, color 0.2s"
+
     }, 1000)
     return () => clearTimeout(timing)
   }, [])
