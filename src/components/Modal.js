@@ -49,25 +49,25 @@ const Modal = ({ id }) => {
   const poke = useSelector((state) => state.poke);
 
   useEffect(() => {
+
     let types = [];
 
-    for (let i = 0; i < poke.pokeList.length; i++) {
-      if (poke.pokeList[i].id == id) {
-        let index = 0;
-        for (let j = 0; j < poke.pokeList[i].types.length; j++) {
-          types[index] = poke.pokeList[i].types[j].type.name;
-          index++;
-        }
+    poke.pokeList.forEach((pokemon) => {
+      if (pokemon.id === id) {
+
+        pokemon.types.forEach((item) => {
+          types.push(item.type.name)
+        })
 
         setPokeInfo({
-          img: poke.pokeList[i].sprites.front_default,
-          name: poke.pokeList[i].name,
-          height: poke.pokeList[i].height,
-          weight: poke.pokeList[i].weight,
+          img: pokemon.sprites.front_default,
+          name: pokemon.name,
+          height: pokemon.height,
+          weight: pokemon.weight,
           types: types,
         });
       }
-    }
+    })
     setTransition(true);
   }, []);
 

@@ -19,11 +19,8 @@ const Main = ({ pokeList, search }) => {
     const total = pokeList.length
     let getPokemons = await loadMore(total)
     let newPokemons = pokeList.concat(getPokemons)
-    const timing = setTimeout(() => {
-      dispatch(setPokeList(newPokemons))
-      dispatch(setLoading({ type: 'more', value: false }))
-    }, 1000)
-    return () => clearTimeout(timing)
+    dispatch(setPokeList(newPokemons))
+    dispatch(setLoading({ type: 'more', value: false }))
   }
 
   return (
