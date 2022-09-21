@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import fetchPokemons from './pokeAPI';
-import { setPokeList, setSearchTerm, setLoading, setDarkTheme } from './pokedex';
+import { setPokeList, setLoading, setDarkTheme } from './store/pokeSlice';
 import Main from './components/Main';
 import Switch from "react-switch";
 import { Sun } from './icons/Sun';
 import { Moon } from './icons/Moon';
 import { Helmet } from 'react-helmet';
-
 
 const App = () => {
 

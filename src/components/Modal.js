@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { setModalStatus } from "../pokedex";
+import { setModalStatus } from "../store/pokeSlice";
 import { useEffect, useState } from "react";
 
 const ModalBox = styled.div`

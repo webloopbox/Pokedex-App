@@ -1,14 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.scss';
 import App from './App';
-import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux';
-import pokeReducer from './pokedex'
-
-const store = configureStore({
-  reducer: { poke: pokeReducer },
-})
+import { store } from './store';
 
 ReactDOM.render(
   <Provider store={store}>
