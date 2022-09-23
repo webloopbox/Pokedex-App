@@ -12,8 +12,6 @@ const App = () => {
 
   const dispatch = useDispatch()
   const poke = useSelector((state) => state.poke)
-  const { search } = poke
-  console.log('poke: ', poke)
 
   useEffect(() => {
 
@@ -43,7 +41,7 @@ const App = () => {
       <div className={"switch " + (poke.darkTheme ? 'dark' : '')}>
         <Switch uncheckedIcon={<Sun />} checkedIcon={<Moon />} onColor='#7272ff' borderRadius={8} checked={poke.darkTheme} onChange={() => dispatch(setDarkTheme(!poke.darkTheme))} />
       </div>
-      <Main pokeList={poke.pokeList} search={search} />
+      <Main />
     </>
 
   )

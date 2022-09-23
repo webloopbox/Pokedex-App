@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import pokeFilter from '../pokeFilter'
 
 export const pokeSlice = createSlice({
     name: "pokedex",
@@ -40,6 +41,12 @@ export const pokeSlice = createSlice({
         },
     },
 });
+
+export const getSearchedPokeList = (pokeList, search) => {
+    return pokeList.filter((val) => {
+        return pokeFilter(val, search)
+    })
+}
 
 export const {
     setPokeList,

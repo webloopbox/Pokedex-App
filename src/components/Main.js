@@ -1,6 +1,5 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { setPokeList, setSearchTerm, setLoading, setModalStatus } from '../store/pokeSlice';
-import pokeFilter from '../pokeFilter'
+import { useSelector, useDispatch, connect } from 'react-redux';
+import { setPokeList, setSearchTerm, setLoading, setModalStatus, getSearchedPokeList } from '../store/pokeSlice';
 import PokeCard from './pokeCard'
 import Header from './Header'
 import SkeletonCard from './SkeletonCard';
@@ -8,7 +7,7 @@ import { loadMore } from '../pokeAPI';
 import Modal from './Modal';
 
 
-const Main = ({ pokeList, search }) => {
+const Main = ({ pokeList, search, searchedPokeList }) => {
 
   const dispatch = useDispatch()
   const poke = useSelector((state) => state.poke)
@@ -30,9 +29,7 @@ const Main = ({ pokeList, search }) => {
         <div className='pokemon-cards'>
           {
             (loadingInit == true) ? <SkeletonCard load='init' /> :
-              pokeList.filter((val) => {
-                return pokeFilter(val, search)
-              }).map((item) => {
+              searchedPokeList.map((item) => {
                 const { id, name, height, weight, sprites } = item
                 return <PokeCard key={id} item={item} name={name} height={height} weight={weight} sprites={sprites} onClick={() => dispatch(setModalStatus({ open: true, id }))} />
               })
@@ -53,4 +50,12 @@ const Main = ({ pokeList, search }) => {
   )
 }
 
-export default Main
+const mapStateToProps = (state) => {
+  return {
+    pokeList: state.poke.pokeList,
+    search: state.poke.search,
+    searchedPokeList: getSearchedPokeList(state.poke.pokeList, state.poke.search)
+  }
+};
+
+export default connect(mapStateToProps)(Main)
