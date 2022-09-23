@@ -1,10 +1,11 @@
 import { useSelector } from 'react-redux';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { RootState } from '../store';
 
-const SkeletonCard = ({ load }) => {
+const SkeletonCard = ({ load }: {load: string}) => {
 
-    const poke = useSelector((state) => state.poke)
+    const poke = useSelector((state: RootState) => state.poke)
 
     if (load == 'init') {
         return (
@@ -31,8 +32,6 @@ const SkeletonCard = ({ load }) => {
             </>
         )
     }
-
-
-
 }
+
 export default SkeletonCard;

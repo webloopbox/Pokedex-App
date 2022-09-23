@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
-import { setSearchType } from '../store/pokeSlice';
+import { SetSearchTermType, setSearchType } from '../store/pokeSlice';
 
-const Header = ({ handler, currentType }) => {
+const Header = ({ handler, currentType } : {handler: SetSearchTermType, currentType: string}) => {
 
     const dispatch = useDispatch()
 

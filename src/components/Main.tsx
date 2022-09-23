@@ -5,12 +5,15 @@ import Header from './Header'
 import SkeletonCard from './SkeletonCard';
 import { loadMore } from '../pokeAPI';
 import Modal from './Modal';
+import { RootState } from '../store';
+import { PokeListType } from '../models/Poke';
+import { SearchType } from '../models/Search';
 
 
-const Main = ({ pokeList, search, searchedPokeList }) => {
-
+const Main = ({ pokeList, search, searchedPokeList } : {pokeList: PokeListType, search: SearchType, searchedPokeList: PokeListType}) => {
+  
   const dispatch = useDispatch()
-  const poke = useSelector((state) => state.poke)
+  const poke = useSelector((state: RootState) => state.poke)
   const { loadingInit, loadingMore, modalStatus } = poke
 
   const morePoke = async () => {
@@ -30,8 +33,8 @@ const Main = ({ pokeList, search, searchedPokeList }) => {
           {
             (loadingInit == true) ? <SkeletonCard load='init' /> :
               searchedPokeList.map((item) => {
-                const { id, name, height, weight, sprites } = item
-                return <PokeCard key={id} item={item} name={name} height={height} weight={weight} sprites={sprites} onClick={() => dispatch(setModalStatus({ open: true, id }))} />
+                const { id, name, image } = item
+                return <PokeCard key={id} item={item} name={name} image={image} onClick={() => dispatch(setModalStatus({ open: true, id }))} />
               })
           }
 
@@ -43,14 +46,13 @@ const Main = ({ pokeList, search, searchedPokeList }) => {
                 <SkeletonCard load='more' /> : <button className='load-more' onClick={() => morePoke()}>Load more</button>
         }
 
-        {(modalStatus.open) ? <Modal open={modalStatus.open} id={modalStatus.id} /> : <></>}
-
+        {(modalStatus.open) ? <Modal id={modalStatus.id} /> : null}
       </main>
     </div>
   )
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: RootState) => {
   return {
     pokeList: state.poke.pokeList,
     search: state.poke.search,

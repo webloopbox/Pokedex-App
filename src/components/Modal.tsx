@@ -2,17 +2,20 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { setModalStatus } from "../store/pokeSlice";
 import { useEffect, useState } from "react";
+import { ModalStyledProps } from "../models/Modal";
+import { RootState } from "../store";
+import { ModalPokeInfo } from "../models/Poke";
 
 const ModalBox = styled.div`
   position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
-  visibility: ${({ transition }) => {
-    return transition ? "visible" : "hidden";
+  visibility: ${(props: ModalStyledProps) => {
+    return props.transition ? "visible" : "hidden";
   }};
-  opacity: ${({ transition }) => {
-    return transition ? "1" : "0";
+  opacity: ${(props: ModalStyledProps) => {
+    return props.transition ? "1" : "0";
   }};
   top: 0;
   left: 0;
@@ -23,7 +26,7 @@ const ModalBox = styled.div`
   z-index: 1000;
 `;
 
-const ModalContent = styled.div.attrs((props) => ({
+const ModalContent = styled.div.attrs((props: ModalStyledProps) => ({
   className: props.className,
 }))`
   position: relative;
@@ -31,26 +34,26 @@ const ModalContent = styled.div.attrs((props) => ({
   height: 80%;
   max-width: 400px;
   max-height: 400px;
-  background-color: ${({ darkTheme }) => {
-    return darkTheme ? "#34495E" : "white";
+  background-color: ${(props: ModalStyledProps) => {
+    return props.darkTheme ? "#34495E" : "white";
   }};
   border-radius: 8px;
   transition: 0.2s;
-  transform: ${({ transition }) => {
-    return transition ? "scale(1)" : "scale(0.8)";
+  transform: ${(props: ModalStyledProps) => {
+    return props.transition ? "scale(1)" : "scale(0.8)";
   }};
 `;
 
-const Modal = ({ id }) => {
-  const [pokeInfo, setPokeInfo] = useState("");
-  const [transition, setTransition] = useState(false);
+const Modal = ({ id } : {id: number|null}) => {
+  const [pokeInfo, setPokeInfo] = useState<ModalPokeInfo>({});
+  const [transition, setTransition] = useState<boolean>(false);
 
   const dispatch = useDispatch();
-  const poke = useSelector((state) => state.poke);
+  const poke = useSelector((state: RootState) => state.poke);
 
   useEffect(() => {
 
-    let types = [];
+    let types: Array<string> = [];
 
     poke.pokeList.forEach((pokemon) => {
       if (pokemon.id === id) {
@@ -60,7 +63,7 @@ const Modal = ({ id }) => {
         })
 
         setPokeInfo({
-          img: pokemon.sprites.front_default,
+          img: pokemon.image,
           name: pokemon.name,
           height: pokemon.height,
           weight: pokemon.weight,
@@ -90,14 +93,14 @@ const Modal = ({ id }) => {
         <h1>{pokeInfo.name}</h1>
         <div>
           <h4>
-            <span>Height:</span> {pokeInfo.height / 10}m
+            <span>Height:</span> {pokeInfo.height ? pokeInfo.height / 10 : ' - '}m
           </h4>
           <h4>
-            <span>Weight:</span> {pokeInfo.weight / 10}kg
+            <span>Weight:</span> {pokeInfo.weight ? pokeInfo.weight / 10 : ' - '}kg
           </h4>
           <div className="desc-type">
             {pokeInfo.types ? (
-              pokeInfo.types.map((item) => <p>{item}</p>)
+              pokeInfo.types.map((item: string) => <p>{item}</p>)
             ) : (
               <></>
             )}
